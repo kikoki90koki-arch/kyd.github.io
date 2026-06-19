@@ -3,290 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대구 달성공원</title>
+    <title>대구 달성공원 리뉴얼 프로젝트</title>
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
     <style>
-        /* 기본 초기화 */
+        /* 기본 스타일 초기화 */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Malgun Gothic', sans-serif;
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
-            overflow: hidden;
+            background-color: #f4f6f4;
+            overflow-x: hidden;
         }
 
-        /* [상단 GNB 네비게이션] */
-        header {
-            width: 100%;
-            height: 90px;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 60px;
+        /* 탭 내비게이션 바 (고정형) */
+        .nav-bar {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 60px;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 1000;
         }
 
-        /* 입체감 있는 달성공원 로고 그래픽 효과 */
-        .logo {
-            font-size: 34px;
-            font-weight: 900;
-            color: #1b9552;
-            letter-spacing: -1.5px;
-            text-shadow: 
-                -2px -2px 0 #ffffff,  2px -2px 0 #ffffff, -2px  2px 0 #ffffff,  2px  2px 0 #ffffff,
-                -3px -3px 0 #1b9552,  3px -3px 0 #1b9552, -3px  3px 0 #1b9552,  3px  3px 0 #1b9552,
-                4px 4px 0px rgba(0, 0, 0, 0.15);
-        }
-
-        nav {
-            display: flex;
-            gap: 50px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333333;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        /* 아이콘 모양 디테일 유지 */
-        .icon-circle-user {
-            width: 34px;
-            height: 34px;
-            border: 2.5px solid #7da08d;
-            border-radius: 50%;
-            position: relative;
-        }
-        .icon-circle-user::before {
-            content: '';
-            position: absolute;
-            top: 6px; left: 10px;
-            width: 8px; height: 8px;
-            border: 2.5px solid #7da08d;
-            border-radius: 50%;
-        }
-        .icon-circle-user::after {
-            content: '';
-            position: absolute;
-            bottom: 3px; left: 4px;
-            width: 20px; height: 8px;
-            border: 2.5px solid #7da08d;
-            border-radius: 12px 12px 0 0;
-            border-bottom: none;
-        }
-
-        .icon-menu-bar {
-            width: 28px;
-            height: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .icon-menu-bar span {
-            display: block;
-            width: 100%;
-            height: 4px;
-            background-color: #3d6b52;
-            border-radius: 2px;
-        }
-
-        /* [메인 컨텐츠 영역] */
-        .main-section {
-            width: 100%;
-            height: 100vh;
-            padding-top: 90px;
-            position: relative;
-            /* 잘라낸 달성공원 원본 배경 이미지 배치 */
-            background: url('bg-main.jpg') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* 원본의 완벽한 반원 형태 투명 어두운 장막 */
-        .main-section::before {
-            content: '';
-            position: absolute;
-            top: 15%;
-            width: 130vw;
-            height: 130vw;
-            background: rgba(0, 0, 0, 0.55);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        /* 중앙 정렬 텍스트 레이어 */
-        .center-box {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: #ffffff;
-            width: 100%;
-            max-width: 900px;
-            margin-top: -60px;
-        }
-
-        /* 상단 곰돌이 배지와 가로 선셋 */
-        .badge-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-        .line-deco {
-            width: 80px;
-            height: 1.5px;
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-        .badge-img {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-        }
-
-        .sub-title {
-            font-size: 20px;
-            color: #24b863;
-            font-weight: bold;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .main-title {
-            font-size: 76px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-        }
-
-        .desc-title {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 50px;
-            letter-spacing: -1px;
-        }
-
-        /* 시안과 똑같은 높이와 크기의 알약형 흰색 검색창 */
-        .search-box-container {
-            width: 100%;
-            max-width: 660px;
-            position: relative;
-            margin: 0 auto;
-        }
-
-        .search-input-field {
-            width: 100%;
-            height: 68px;
-            padding: 0 75px 0 40px;
-            border-radius: 50px;
-            border: none;
-            font-size: 22px;
-            outline: none;
-            background-color: #ffffff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .search-green-icon {
-            position: absolute;
-            right: 35px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 26px;
-            height: 26px;
-            border: 4px solid #1b9552;
-            border-radius: 50%;
+        .nav-btn {
+            padding: 10px 25px;
+            margin: 0 10px;
             cursor: pointer;
-        }
-        .search-green-icon::after {
-            content: '';
-            position: absolute;
-            top: 18px; left: 18px;
-            width: 12px; height: 4px;
-            background-color: #1b9552;
-            transform: rotate(45deg);
+            font-weight: bold;
+            font-size: 16px;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
         }
 
-        /* [PNG 이미지 장식 레이아웃] */
-        .decor-img {
-            position: absolute;
-            z-index: 5;
+        .nav-btn.active, .nav-btn:hover {
+            color: #1e6236;
+            border-bottom: 3px solid #1e6236;
+        }
+
+        /* 콘텐츠 페이지 컨테이너 */
+        .page-container {
+            margin-top: 60px;
+            width: 100%;
+            min-height: calc(100vh - 60px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .page-container.active {
+            display: flex;
+        }
+
+        /* 공통 이미지 카드 스타일 및 등장 모션 */
+        .img-card {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             object-fit: contain;
-            pointer-events: none;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* 왼쪽 나뭇잎 묶음 배치 */
-        .leaf-left-group {
-            bottom: -20px;
-            left: -10px;
-            width: 260px;
+        .img-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
         }
 
-        /* 오른쪽 위 나뭇잎 배치 */
-        .leaf-right-group {
-            top: 100px;
-            right: -10px;
-            width: 200px;
+        /* 애니메이션 정의 */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* 우측 하단 크기 및 위상 완벽 매치된 사자 캐릭터 */
-        .lion-char-fixed {
+        /* 3번 페이지: 360도 VR 전용 뷰어 스타일 */
+        .vr-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        #panorama-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .vr-overlay-ui {
             position: absolute;
-            bottom: 20px;
-            right: 30px;
-            width: 210px;
-            z-index: 20;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* UI 레이어 아래의 VR 조작이 가능하도록 설정 */
+            z-index: 10;
+        }
+
+        .vr-static-img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">달성공원</div>
-        <nav>
-            <a href="#">공원안내</a>
-            <a href="#">VR</a>
-            <a href="#">기획 및 설계</a>
-        </nav>
-        <div class="header-icons">
-            <div class="icon-circle-user"></div>
-            <div class="icon-menu-bar">
-                <span></span>
-                <span></span>
-                <span></span>
+    <nav class="nav-bar">
+        <div class="nav-btn active" onclick="switchPage(1)">1. 메인 홈</div>
+        <div class="nav-btn" onclick="switchPage(2)">2. 공원안내</div>
+        <div class="nav-btn" onclick="switchPage(3)">3. VR 360뷰</div>
+        <div class="nav-btn" onclick="switchPage(4)">4. 기획 및 설계</div>
+    </nav>
+
+    <div id="page1" class="page-container active">
+        <img src="1.jpg" alt="메인 홈" class="img-card">
+    </div>
+
+    <div id="page2" class="page-container">
+        <img src="2.jpg" alt="공원안내" class="img-card">
+    </div>
+
+    <div id="page3" class="page-container">
+        <div class="vr-wrapper">
+            <div id="panorama-viewer"></div>
+           
+            <div class="vr-overlay-ui">
+                <img src="3.jpg" alt="VR UI Overlay" class="vr-static-img" style="display:none;">
             </div>
         </div>
-    </header>
+    </div>
 
-    <main class="main-section">
+    <div id="page4" class="page-container">
+        <img src="4.PNG" alt="기획 및 설계" class="img-card">
+    </div>
 
-        <img src="leaf-left.png" class="decor-img leaf-left-group" alt="좌측 나뭇잎">
-        <img src="leaf-right.png" class="decor-img leaf-right-group" alt="우측 나뭇잎">
+    <script>
+        // 페이지 전환 스크립트
+        function switchPage(pageNum) {
+            // 모든 페이지 비활성화
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            // 모든 버튼 비활성화
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
 
-        <div class="center-box">
-            <div class="badge-row">
-                <div class="line-deco"></div>
-                <img src="bear-badge.png" class="badge-img" alt="곰돌이 배지">
-                <div class="line-deco"></div>
-            </div>
-            
-            <p class="sub-title">대구광역시의 오랜 전통이 담겨있는</p>
-            <h1 class="main-title">대구 달성공원</h1>
+            // 선택한 페이지 및 버튼 활성화
+            document.getElementById(`page${pageNum}`).classList.add('active');
+            document.querySelectorAll('.nav-btn')[pageNum - 1].classList.add('active');
+
+            // 3번 VR 페이지가 열릴 때 360 뷰어 크기 재조정 리프레시
+            if(pageNum === 3) {
+                setTimeout(() => {
+                    if(typeof viewer !== 'undefined') {
+                        // 파노라마 이미지 로드 (제공된 고화질 파노라마 중 하나인 KakaoTalk_20260529_164502496_01.jpg 사용)
+                        viewer = pannellum.viewer('panorama-viewer', {
+                            "type": "cubic",
+                            "cubeMap": [
+                                "KakaoTalk_20260529_164502496_01.jpg",
+                                "KakaoTalk_20260529_164502496_03.jpg",
+                                "KakaoTalk_20260529_164502496_07.jpg",
+                                "KakaoTalk_20260529_164502496_10.jpg",
+                                "KakaoTalk_20260529_164502496_01.jpg",
+                                "KakaoTalk_20260529_164502496_03.jpg"
+                            ],
+                            "autoLoad": true,
+                            "compass": false
+                        });
+                    }
+                }, 100);
+            }
+        }
+
+        // 초기 VR 뷰어 세팅 (가장 와이드한 기본 풍경 배치)
+        var viewer = pannellum.viewer('panorama-viewer', {
+            "type": "equirectangular",
+            "panorama": "KakaoTalk_20260529_164502496_01.jpg",
+            "autoLoad": true,
+            "haov": 180, /* 파노라마 왜곡 방지를 위한 화각 최적화 */
+            "vaov": 90
+        });
+    </script>
+</body>
+</html>
