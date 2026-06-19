@@ -3,276 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>대구 달성공원 - 메인홈</title>
+    <title>대구 달성공원</title>
     <style>
-        /* 기본 초기화 */
+        /* 기본 스타일 초기화 */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Malgun Gothic', dotum, sans-serif;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
             background-color: #ffffff;
+            overflow: hidden;
         }
 
-        /* 1. 상단 내비게이션 바 (GNB) */
+        /* 1. 상단 헤더 영역 (GNB) */
         header {
             width: 100%;
-            height: 70px;
+            height: 90px;
             background-color: #ffffff;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px;
+            padding: 0 50px;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
-            border-bottom: 1px solid #f0f0f0;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            color: #1b9552;
+        /* 메인 그린 로고 스타일 */
+        .logo-area {
+            font-size: 36px;
+            font-weight: 900;
+            color: #23b863;
+            letter-spacing: -1.5px;
+            /* 디자인 시안의 입체감 있는 이중 테두리 효과 구현 */
+            text-shadow: 
+                -2px -2px 0 #ffffff,  2px -2px 0 #ffffff, -2px  2px 0 #ffffff,  2px  2px 0 #ffffff,
+                -3px -3px 0 #23b863,  3px -3px 0 #23b863, -3px  3px 0 #23b863,  3px  3px 0 #23b863,
+                -4px -4px 0 #ffffff,  4px -4px 0 #ffffff, -4px  4px 0 #ffffff,  4px  4px 0 #ffffff,
+                 5px  5px 0px rgba(27, 149, 82, 0.3);
             cursor: pointer;
-            letter-spacing: -1px;
-            /* 이미지의 입체감 있는 폰트 느낌을 위한 텍스트 섀도우 */
-            text-shadow: 1px 1px 0px #ffffff, 2px 2px 0px #1b9552; 
         }
 
         nav {
             display: flex;
-            gap: 35px;
+            gap: 50px;
         }
 
         nav a {
             text-decoration: none;
             color: #333333;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            transition: color 0.2s ease;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
         nav a:hover {
-            color: #1b9552;
+            color: #23b863;
         }
 
+        /* 우측 상단 유저 및 메뉴 아이콘 */
         .header-icons {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: 22px;
-            color: #7da08d;
-            cursor: pointer;
+            gap: 25px;
         }
 
-        /* 2. 메인 페이지 섹션 */
-        #main-page {
+        .icon-user {
+            width: 32px;
+            height: 32px;
+            border: 2.5px solid #7da08d;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+        }
+        .icon-user::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 9px;
+            width: 9px; height: 9px;
+            border: 2.5px solid #7da08d;
+            border-radius: 50%;
+        }
+        .icon-user::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 4px;
+            width: 19px; height: 8px;
+            border: 2.5px solid #7da08d;
+            border-radius: 10px 10px 0 0;
+            border-bottom: none;
+        }
+
+        .icon-hamburger {
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .icon-hamburger span {
+            display: block;
+            width: 100%;
+            height: 3.5px;
+            background-color: #3d6b52;
+            border-radius: 2px;
+        }
+
+        /* 2. 메인 화면 뷰포트 영역 (배경) */
+        .main-viewport {
             width: 100%;
             height: 100vh;
-            padding-top: 70px;
+            padding-top: 90px;
             position: relative;
-            /* 배경 이미지 (전통 건물 느낌의 Unsplash 이미지 배치) */
-            background: url('https://images.unsplash.com/photo-1596120244123-cc9326793433?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            /* 시안 속 달성공원 정문(전통 기와건물) 분위기를 재현한 백그라운드 매칭 */
+            background: url('https://images.unsplash.com/photo-1599839441864-ec3b8006e8b4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             overflow: hidden;
         }
 
-        /* 이미지 중앙의 어두운 반원형 투명 오버레이 레이어 */
+        /* [디자인 시안 핵심] 상단에서부터 둥글게 내려오는 반원형 어두운 아크 오버레이 */
         .arc-overlay {
             position: absolute;
-            top: 15%;
-            width: 85%;
-            height: 120%;
+            top: 50px;
+            width: 130%;
+            height: 150%;
             background: rgba(0, 0, 0, 0.55);
-            border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+            border-radius: 50% / 40% 40% 0 0;
+            transform: translateY(0);
             z-index: 1;
         }
 
-        /* 메인 콘텐츠 컨테이너 */
-        .main-container {
+        /* 3. 중앙 콘텐츠 영역 */
+        .center-content {
             position: relative;
-            z-index: 2;
-            max-width: 800px;
-            width: 100%;
+            z-index: 10;
             text-align: center;
             color: #ffffff;
-            padding: 0 20px;
-            margin-top: -50px;
+            width: 100%;
+            max-width: 850px;
+            padding-top: 60px;
         }
 
-        /* 중앙 상단 미니 아이콘 뱃지 */
-        .mini-badge {
-            display: inline-block;
+        /* 중앙 상단 곰돌이 로고 가로선 및 배지 세트 */
+        .badge-line-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .badge-line {
+            width: 70px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        /* 시안 속 동글동글한 동물 얼굴 배지 CSS 드로잉 */
+        .bear-badge {
+            width: 44px;
+            height: 44px;
             background-color: #ffffff;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            line-height: 36px;
-            font-size: 18px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            border: 2px solid #555;
+        }
+        .bear-badge::before, .bear-badge::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            width: 14px; height: 14px;
+            background-color: #ffffff;
+            border: 2px solid #555;
+            border-radius: 50%;
+        }
+        .bear-badge::before { left: -4px; }
+        .bear-badge::after { right: -4px; }
+        .bear-face-inner {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: #fff; border-radius: 50%; z-index: 2;
+        }
+        .bear-eyes {
+            position: absolute; top: 16px; left: 11px; width: 4px; height: 4px; background: #333; border-radius: 50%;
+            box-shadow: 14px 0 0 #333;
+        }
+        .bear-nose {
+            position: absolute; top: 19px; left: 17px; width: 6px; height: 4px; background: #333; border-radius: 40%;
         }
 
-        .main-subtitle {
-            font-size: 16px;
-            color: #2edb74;
-            margin-bottom: 8px;
+        .text-subtitle {
+            font-size: 19px;
+            color: #24b863;
             font-weight: bold;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
-        .main-title {
-            font-size: 55px;
+        .text-title {
+            font-size: 68px;
             font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
+            margin-bottom: 12px;
+            letter-spacing: -1.5px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
-        .main-desc {
-            font-size: 24px;
-            margin-bottom: 35px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+        .text-desc {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 50px;
+            letter-spacing: -0.5px;
         }
 
-        /* 알약 모양의 검색창 스타일 */
-        .search-bar-container {
+        /* [디자인 시안 핵심] 완전한 라운드 형태의 검색바 스타일 */
+        .search-wrapper {
             width: 100%;
-            max-width: 520px;
+            max-width: 620px;
             position: relative;
             margin: 0 auto;
         }
 
-        .search-bar {
+        .search-bar-input {
             width: 100%;
-            padding: 14px 60px 14px 25px;
+            height: 64px;
+            padding: 0 70px 0 35px;
             border-radius: 50px;
             border: none;
-            font-size: 16px;
+            font-size: 20px;
             outline: none;
             background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
-        .search-icon {
+        /* 초록색 돋보기 아이콘 */
+        .search-icon-btn {
             position: absolute;
-            right: 25px;
+            right: 30px;
             top: 50%;
             transform: translateY(-50%);
-            color: #1b9552;
-            font-size: 20px;
-            font-weight: bold;
+            width: 26px;
+            height: 26px;
+            border: 3.5px solid #1b9552;
+            border-radius: 50%;
             cursor: pointer;
         }
-
-        /* 3. 장식용 그래픽 요소들 (나뭇잎, 캐릭터 등 배경 레이아웃 배치) */
-        .deco-leaf-left-top {
+        .search-icon-btn::after {
+            content: '';
             position: absolute;
-            top: 90px;
-            left: -20px;
-            font-size: 120px;
-            color: #24b863;
-            opacity: 0.9;
-            z-index: 2;
-            user-select: none;
-            transform: rotate(-15deg);
-        }
-
-        .deco-leaf-left-bottom {
-            position: absolute;
-            bottom: 20px;
-            left: -30px;
-            font-size: 140px;
-            color: #1b9552;
-            opacity: 0.9;
-            z-index: 2;
-            user-select: none;
-            transform: rotate(20deg);
-        }
-
-        .deco-leaf-right-top {
-            position: absolute;
-            top: 80px;
-            right: -20px;
-            font-size: 110px;
-            color: #24b863;
-            opacity: 0.8;
-            z-index: 2;
-            user-select: none;
+            top: 18px; left: 18px;
+            width: 10px; height: 3.5px;
+            background-color: #1b9552;
             transform: rotate(45deg);
         }
 
-        /* 우측 하단 사자 캐릭터 스팟 마크 */
-        .char-lion {
+        /* 4. 데코레이션 레이어 (나뭇잎 SVG 정밀 가공 배치) */
+        .leaf-graphic {
             position: absolute;
-            bottom: 40px;
+            fill: #23b863;
+            z-index: 5;
+            pointer-events: none;
+        }
+        /* 왼쪽 상단 몬스테라 잎 */
+        .leaf-lt {
+            top: 110px; left: -30px; width: 190px; height: 210px;
+            transform: rotate(-10deg);
+        }
+        /* 왼쪽 하단 몬스테라 잎 */
+        .leaf-lb {
+            bottom: -30px; left: -40px; width: 240px; height: 260px;
+            fill: #1b9552;
+            transform: rotate(15deg);
+        }
+        /* 오른쪽 상단 몬스테라 잎 */
+        .leaf-rt {
+            top: 100px; right: -40px; width: 180px; height: 200px;
+            transform: rotate(40deg);
+        }
+
+        /* 5. [디자인 시안 핵심] 우측 하단 사자 일러스트 캐릭터 픽스 배치 */
+        .lion-character-container {
+            position: absolute;
+            bottom: 30px;
             right: 40px;
-            z-index: 3;
-            text-align: center;
-            user-select: none;
+            width: 170px;
+            height: 170px;
+            z-index: 20;
+            pointer-events: none;
         }
 
-        .lion-icon {
-            font-size: 90px;
-            line-height: 1;
-            display: block;
-            filter: drop-shadow(2px 4px 5px rgba(0,0,0,0.2));
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* 사자 갈기, 얼굴 구조 고해상도 SVG 벡터 빌드 */
+        .svg-lion {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(3px 5px 6px rgba(0,0,0,0.25));
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">달성공원</div>
+        <div class="logo-area">달성공원</div>
         <nav>
-            <a style="color: #1b9552;">공원안내</a>
+            <a>공원안내</a>
             <a>VR</a>
             <a>기획 및 설계</a>
         </nav>
         <div class="header-icons">
-            <span>👤</span>
-            <span>☰</span>
+            <div class="icon-user"></div>
+            <div class="icon-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
-    <main id="main-page">
+    <main class="main-viewport">
         <div class="arc-overlay"></div>
 
-        <div class="deco-leaf-left-top">🌿</div>
-        <div class="deco-leaf-left-bottom">🌿</div>
-        
-        <div class="deco-leaf-right-top">🌿</div>
+        <svg class="leaf-graphic leaf-lt" viewBox="0 0 100 100">
+            <path d="M10,40 Q30,10 70,20 Q90,40 80,70 Q60,95 30,85 Z M35,25 Q15,45 30,65 M55,20 Q45,50 60,75 M75,35 Q55,60 75,70"/>
+        </svg>
+        <svg class="leaf-graphic leaf-lb" viewBox="0 0 100 100">
+            <path d="M10,40 Q30,10 70,20 Q90,40 80,70 Q60,95 30,85 Z M35,25 Q15,45 30,65 M55,20 Q45,50 60,75 M75,35 Q55,60 75,70"/>
+        </svg>
+        <svg class="leaf-graphic leaf-rt" viewBox="0 0 100 100">
+            <path d="M10,40 Q30,10 70,20 Q90,40 80,70 Q60,95 30,85 Z M35,25 Q15,45 30,65 M55,20 Q45,50 60,75 M75,35 Q55,60 75,70"/>
+        </svg>
 
-        <div class="main-container">
-            <div class="mini-badge">🐻</div>
-            <p class="main-subtitle">대구광역시의 오랜 전통이 담겨있는</p>
-            <h1 class="main-title">대구 달성공원</h1>
-            <p class="main-desc">모두와 함께 쉬는 공간</p>
+        <div class="center-content">
+            <div class="badge-line-container">
+                <div class="badge-line"></div>
+                <div class="bear-badge">
+                    <div class="bear-face-inner">
+                        <div class="bear-eyes"></div>
+                        <div class="bear-nose"></div>
+                    </div>
+                </div>
+                <div class="badge-line"></div>
+            </div>
             
-            <div class="search-bar-container">
-                <input type="text" class="search-bar" placeholder="">
-                <span class="search-icon">🔍</span>
+            <p class="text-subtitle">대구광역시의 오랜 전통이 담겨있는</p>
+            <h1 class="text-title">대구 달성공원</h1>
+            <p class="text-desc">모두와 함께 쉬는 공간</p>
+            
+            <div class="search-wrapper">
+                <input type="text" class="search-bar-input" readonly>
+                <div class="search-icon-btn"></div>
             </div>
         </div>
 
-        <div class="char-lion">
-            <span class="lion-icon">🦁</span>
+        <div class="lion-character-container">
+            <svg class="svg-lion" viewBox="0 0 100 100">
+                <circle cx="50" cy="28" r="16" fill="#e04f33"/>
+                <circle cx="72" cy="38" r="16" fill="#e04f33"/>
+                <circle cx="76" cy="62" r="16" fill="#e04f33"/>
+                <circle cx="58" cy="78" r="16" fill="#e04f33"/>
+                <circle cx="36" cy="74" r="16" fill="#e04f33"/>
+                <circle cx="24" cy="52" r="16" fill="#e04f33"/>
+                <circle cx="28" cy="32" r="16" fill="#e04f33"/>
+                
+                <circle cx="50" cy="52" r="24" fill="#ffcc00"/>
+                
+                <circle cx="34" cy="34" r="6" fill="#ffcc00"/>
+                <circle cx="66" cy="34" r="6" fill="#ffcc00"/>
+                
+                <circle cx="42" cy="50" r="2.5" fill="#333"/>
+                <path d="M56,48 Q61,46 60,52" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+                
+                <circle cx="38" cy="57" r="3" fill="#e04f33" opacity="0.4"/>
+                <circle cx="62" cy="57" r="3" fill="#e04f33" opacity="0.4"/>
+                
+                <polygon points="48,54 52,54 50,56" fill="#333"/>
+                <path d="M47,58 Q50,62 53,58" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                
+                <path d="M22,14 L30,22 M30,14 L22,22" stroke="#ffcc00" stroke-width="3" stroke-linecap="round"/>
+            </svg>
         </div>
     </main>
 
